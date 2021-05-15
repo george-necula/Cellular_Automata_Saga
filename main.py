@@ -15,7 +15,6 @@ def grid_draw():
     for j in range(cell_count_y):
         pygame.draw.rect(window, (100, 100, 100), (0, j * window.get_height() / cell_count_y, window.get_width(), 1))
 
-
 def drawing_mode(cells_list: list(list())):
     while True:
         window.fill((169, 169, 169))
