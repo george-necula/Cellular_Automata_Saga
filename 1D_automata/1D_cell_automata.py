@@ -2,10 +2,10 @@ import pygame
 
 pygame.init()
 running = True
-window = pygame.display.set_mode((1800, 1000))
-cell_width = 2
-# rule = int(0b01100110)
-rule = 30
+window = pygame.display.set_mode((1200, 600))
+cell_width = 1
+# rule = int(0b10100101)
+rule = 110
 cell_count_x = int(window.get_width() / cell_width)
 cell_count_y = int(window.get_height() / cell_width)
 
@@ -44,7 +44,7 @@ window.fill((169, 169, 169),)
 frame = -1
 while running:
     frame += 1
-    print('frame number : ', frame)
+    # print('frame number : ', frame)
     # cl = pygame.time.Clock().tick(20)
 
     if pygame.key.get_pressed()[pygame.K_ESCAPE] == 1:
@@ -55,24 +55,22 @@ while running:
 
 
 
+    if frame < cell_count_y:
+        for i in range(1,cell_count_x-1):
+            if cell_list[i].alive == 1:
+                pygame.draw.rect(window, (10, 10, 10), (
+                    i * window.get_width() / cell_count_x, frame * window.get_height() / cell_count_y,
+                    window.get_width() / cell_count_x, window.get_height() / cell_count_y))
 
-    for i in range(1,cell_count_x-1):
-        if cell_list[i].alive == 1:
-            pygame.draw.rect(window, (10, 10, 10), (
-                i * window.get_width() / cell_count_x, frame * window.get_height() / cell_count_y,
-                window.get_width() / cell_count_x, window.get_height() / cell_count_y))
-
-        cell_new_list[i].alive = cell_list[i].rule_check(cell_list,rule,i)
+            cell_new_list[i].alive = cell_list[i].rule_check(cell_list,rule,i)
 
 
-    cell_list = cell_new_list
-    cell_new_list = list(Cell(0) for _ in range(cell_count_x))
+        cell_list = cell_new_list
+        cell_new_list = list(Cell(0) for _ in range(cell_count_x))
 
     # running = False
 
-    if frame == cell_count_y :
-        comm = input()
-        if comm == exit:
-            running = False
-    grid_draw()
+
+
+    # grid_draw()
     pygame.display.update()
