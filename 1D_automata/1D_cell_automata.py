@@ -2,10 +2,10 @@ import pygame
 
 pygame.init()
 running = True
-window = pygame.display.set_mode((1200, 600))
+window = pygame.display.set_mode((1200, 600), pygame.RESIZABLE)
 cell_width = 1
 # rule = int(0b10100101)
-rule = 110
+rule = 30
 cell_count_x = int(window.get_width() / cell_width)
 cell_count_y = int(window.get_height() / cell_width)
 
@@ -53,7 +53,14 @@ while running:
     if pygame.QUIT in pygame.event.get():
         running = False
 
-
+    if pygame.key.get_pressed()[pygame.K_r] == 1 :
+        cell_count_x = int(window.get_width() / cell_width)
+        cell_count_y = int(window.get_height() / cell_width)
+        cell_list = list(Cell(0) for _ in range(cell_count_x))
+        cell_new_list = list(Cell(0) for _ in range(cell_count_x))
+        cell_list[int(cell_count_x / 2)] = Cell(1)
+        window.fill((169, 169, 169), )
+        frame = 0
 
     if frame < cell_count_y:
         for i in range(1,cell_count_x-1):
